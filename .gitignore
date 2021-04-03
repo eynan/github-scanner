@@ -1,5 +1,8 @@
 # User-specific stuff
 .dbdata/*
+.coverage
+htmlcov/*
+.idea/dataSources.xml
 .idea/modules.xml
 .idea/vcs.xml
 .idea/workspace.xml

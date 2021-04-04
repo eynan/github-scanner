@@ -1,14 +1,17 @@
 from django.test import TestCase
+from django.utils import timezone
 
-from datetime import datetime
+from scan.models import User, Repository
 
-from scan.models import User
-
-MAX_STRING_SIZE = 'a' * 250
+MAX_STRING_SIZE = 'a' * 191
 
 
 def _create_user(**data):
     return User.objects.create(**data)
+
+
+def _create_repository(**data):
+    return Repository.objects.create(**data)
 
 
 class UserTest(TestCase):
@@ -16,22 +19,34 @@ class UserTest(TestCase):
         data = {
             'id': 11,
             'login': 'login',
-            'url':MAX_STRING_SIZE,
-            'name': MAX_STRING_SIZE,
-            'company': MAX_STRING_SIZE,
-            'location': MAX_STRING_SIZE,
-            'email': MAX_STRING_SIZE,
-            'bio': '',
-            'twitter_username': 'teste',
-            'public_repos': 1,
-            'public_gists': 2,
-            'followers': 3,
-            'following': 4,
-            'created_at': datetime.now(),
-            'updated_at': datetime.now()
+            'url': MAX_STRING_SIZE
         }
 
         user = _create_user(**data)
 
         self.assertTrue(isinstance(user, User))
         self.assertEqual(str(user), data['login'])
+
+
+class RepositoryTest(TestCase):
+    def test_user_creation(self):
+        user = _create_user(id=2, login='teste', url='http://teste.com')
+        data = {
+            'id': 11,
+            'user': user,
+            'description': MAX_STRING_SIZE,
+            'name': 'teste',
+            'full_name': MAX_STRING_SIZE,
+            'created_at': timezone.now(),
+            'updated_at': timezone.now(),
+            'pushed_at': timezone.now(),
+            'language': MAX_STRING_SIZE,
+            'forks_count': 1,
+            'stargazers_count': 2,
+            'watchers_count': 3,
+        }
+
+        repository = _create_repository(**data)
+
+        self.assertTrue(isinstance(repository, Repository))
+        self.assertEqual(str(repository), data['name'])

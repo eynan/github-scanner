@@ -3,3 +3,4 @@ mysqlclient==2.0.1
 django-mysql==3.9
 django-cors-headers==3.5.0
 coverage==5.5
+requests==2.25.1

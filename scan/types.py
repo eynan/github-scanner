@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import TypedDict
+from typing import TypedDict, Optional
 
 
 class User(TypedDict):
@@ -14,9 +14,9 @@ class Repository(TypedDict):
     description: str
     name: str
     full_name: str
-    created_at: datetime
-    updated_at: datetime
-    pushed_at: datetime
+    created_at: Optional[datetime]
+    updated_at: Optional[datetime]
+    pushed_at: Optional[datetime]
     language: str
     forks_count: int
     stargazers_count: int

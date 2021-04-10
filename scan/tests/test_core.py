@@ -6,6 +6,7 @@ from django.test import TestCase, SimpleTestCase
 from scan.core import screap_users_and_repositories_data_from_github, screap_repositories_date_from_users_logins_async
 from scan.exceptions import GithubException
 from scan.models import User, Repository
+from scan.tests.utils import get_repository_struct
 
 
 class ScreapDataFromGithubTests(TestCase):
@@ -33,8 +34,8 @@ class ScreapDataFromGithubTests(TestCase):
         repository_user_two_id = 555
         mock_fetch_users.return_value = [_get_user_struct(user_one_id), _get_user_struct(user_two_id)]
         mock_fetch_repositories.side_effect = [
-            [_get_repository_struct(repository_user_one_id, user_one_id)],
-            [_get_repository_struct(repository_user_two_id, user_two_id)]
+            [get_repository_struct(repository_user_one_id, user_one_id)],
+            [get_repository_struct(repository_user_two_id, user_two_id)]
         ]
 
         screap_users_and_repositories_data_from_github()
@@ -51,7 +52,7 @@ class ScreapRepositoriesDateFromUsersLoginsAsyncTests(SimpleTestCase):
     @patch('scan.core.fetch_login_repository')
     async def test_return_all_data_returned_from_logins(self, mock_request):
         logins = ['test_1', 'test_2']
-        expected_list = [[_get_repository_struct(1, 11)], [_get_repository_struct(2, 22)]]
+        expected_list = [[get_repository_struct(1, 11)], [get_repository_struct(2, 22)]]
         mock_request.side_effect = expected_list
 
         result = await screap_repositories_date_from_users_logins_async(logins)
@@ -72,21 +73,4 @@ def _get_user_struct(id):
         'id': id,
         'login': 'test',
         'url': 'http://test.com'
-    }
-
-
-def _get_repository_struct(id, user_id):
-    return {
-        'id': id,
-        'user_id': user_id,
-        'description': 'test',
-        'name': 'test',
-        'full_name': 'test',
-        'created_at': timezone.now(),
-        'updated_at': timezone.now(),
-        'pushed_at': timezone.now(),
-        'language': 'test',
-        'forks_count': 2,
-        'stargazers_count': 2,
-        'watchers_count': 2
     }

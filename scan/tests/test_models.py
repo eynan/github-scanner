@@ -29,7 +29,7 @@ class UserTest(TestCase):
 
 
 class RepositoryTest(TestCase):
-    def test_user_creation(self):
+    def test_repository_creation(self):
         user = _create_user(id=2, login='teste', url='http://teste.com')
         data = {
             'id': 11,

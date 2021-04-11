@@ -36,7 +36,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
-    'scan'
+    'rest_framework',
+    'django_filters',
+    'scan',
 ]
 
 MIDDLEWARE = [
@@ -84,6 +86,13 @@ DATABASES = {
         'OPTIONS': {'charset': 'utf8mb4'},
     }
 }
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],
+    'DEFAULT_PAGINATION_CLASS': 'config.pagination.ResultsSetPagination',
+    'ORDERING_PARAM': 'order_by',
+}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

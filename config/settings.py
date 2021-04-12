@@ -77,19 +77,17 @@ WSGI_APPLICATION = 'config.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.mysql',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'admin',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'db',
-        'PORT': '3306',
-        'OPTIONS': {'charset': 'utf8mb4'},
+        'PORT': '5432',
     }
 }
 
 if 'test' in sys.argv or 'test_coverage' in sys.argv: #Covers regular testing and django-coverage in github actions
     DATABASES['default']['ENGINE'] = 'django.db.backends.sqlite3'
-    DATABASES['default']['OPTIONS'] = {}
 
 REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend'],

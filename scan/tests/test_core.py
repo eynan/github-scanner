@@ -1,4 +1,3 @@
-from django.utils import timezone
 from unittest.mock import patch
 
 from django.test import TestCase, SimpleTestCase
@@ -47,6 +46,24 @@ class ScreapDataFromGithubTests(TestCase):
         self.assertEqual(1, len(repositories_user_two))
         self.assertEqual(repository_user_two_id, repositories_user_two[0].id)
 
+    @patch('scan.core.fetch_login_repository')
+    @patch('scan.core.fetch_github_users_greater_then_the_last_user_id')
+    @patch('scan.core.create_log_error')
+    def test_creates_log_when_an_error_occurs_when_fetch_data_from_the_repositories(self, mock_log, mock_fetch_users, mock_fetch_repositories):
+        user_one_id = 44
+        user_two_id = 55
+        repository_user_one_id = 444
+        exception = GithubException(500, 'Bad request', 'wrong login')
+        mock_fetch_users.return_value = [_get_user_struct(user_one_id), _get_user_struct(user_two_id)]
+        mock_fetch_repositories.side_effect = [
+            [get_repository_struct(repository_user_one_id, user_one_id)],
+            exception
+        ]
+
+        screap_users_and_repositories_data_from_github()
+
+        mock_log.assert_called_once_with(exception)
+
 
 class ScreapRepositoriesDateFromUsersLoginsAsyncTests(SimpleTestCase):
     @patch('scan.core.fetch_login_repository')
@@ -61,7 +78,7 @@ class ScreapRepositoriesDateFromUsersLoginsAsyncTests(SimpleTestCase):
 
     @patch('scan.core.fetch_login_repository')
     async def test_return_exception_raised_in_fetch_login_repository(self, mock_request):
-        mock_request.side_effect = GithubException(500, 'Bad request')
+        mock_request.side_effect = GithubException(500, 'Bad request', 'login invalido')
 
         result = await screap_repositories_date_from_users_logins_async(['login'])
 

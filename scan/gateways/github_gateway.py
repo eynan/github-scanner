@@ -37,7 +37,7 @@ def fetch_github_users_greater_then_the_last_user_id(last_user_id: int, records_
         return fetch_github_users_greater_then_the_last_user_id(last_user_id)
 
     else:
-        raise GithubException(response.status_code, response.reason)
+        raise GithubException(response.status_code, response.reason, f'last user id: {last_user_id}')
 
 
 async def fetch_login_repository(session: ClientSession, login: str, page: int = 1) -> List[Repository]:
@@ -62,7 +62,7 @@ async def fetch_login_repository(session: ClientSession, login: str, page: int =
                 await asyncio.sleep(seconds_to_wait)
             return await fetch_login_repository(session, login, page)
         else:
-            raise GithubException(status_code, response.reason)
+            raise GithubException(status_code, response.reason, f'Login: {login}, page: {page}')
         return [parse_github_repository_to_repository(repository) for repository in repositories] if page == 1 else repositories
 
 

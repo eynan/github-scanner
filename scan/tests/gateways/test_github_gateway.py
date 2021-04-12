@@ -106,7 +106,7 @@ class FetchGithubUsersGreaterThenTheLastUserIdTests(SimpleTestCase):
         with self.assertRaises(GithubException) as context:
             fetch_github_users_greater_then_the_last_user_id(0)
 
-        self.assertEqual('Github api returned the status code 500, reason: Bad request.', str(context.exception))
+        self.assertEqual('Github api returned the status code 500, reason: Bad request, detail: last user id: 0.', str(context.exception))
 
 
 class FetchLoginRepositoryAsyncTests(SimpleTestCase):
@@ -208,7 +208,7 @@ class FetchLoginRepositoryAsyncTests(SimpleTestCase):
         with self.assertRaises(GithubException) as context:
             await fetch_login_repository(client_session_mock, 'test', 1)
 
-        self.assertEqual('Github api returned the status code 500, reason: Bad request.', str(context.exception))
+        self.assertEqual('Github api returned the status code 500, reason: Bad request, detail: Login: test, page: 1.', str(context.exception))
 
     def _set_get_mock_response(self, mock_get, status, headers, json_data, reason=None):
         mock_get.get.return_value.__aenter__.return_value.status = status

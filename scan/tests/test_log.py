@@ -14,4 +14,3 @@ class LogTests(TestCase):
         create_log_error(exception)
 
         mock_log_error.error.assert_called_with('Critical damage')
-

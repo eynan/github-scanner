@@ -14,6 +14,3 @@ class LogTests(TestCase):
         create_log_error(exception)
 
         mock_log_error.error.assert_called_with('Critical damage')
-
-    def test_github_ci(self):
-        self.assertTrue(False)

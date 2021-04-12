@@ -10,16 +10,21 @@ services:
     volumes:
       - .:/app
     depends_on:
-      - db
+      db:
+        condition: service_healthy
 
   db:
-    image: mysql:5.7.22
-    restart: always
-    environment:
-      MYSQL_DATABASE: admin
-      MYSQL_USER: root
-      MYSQL_ROOT_PASSWORD: root
+    image: postgres:12.0-alpine
     volumes:
-      - .dbdata:/var/lib/mysql
+      - .dbdata_postgres:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_USER=root
+      - POSTGRES_PASSWORD=root
+      - POSTGRES_DB=admin
     ports:
-      - 33066:3306
+      - 5432:5432
+    healthcheck:
+      test: "pg_isready"
+      interval: 5s
+      timeout: 5s
+      retries: 5

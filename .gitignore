@@ -3,4 +3,5 @@
 .coverage
 htmlcov/*
 .idea/*
+*.pyc
 error.log

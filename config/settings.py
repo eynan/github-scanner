@@ -81,8 +81,8 @@ DATABASES = {
         'NAME': 'admin',
         'USER': 'root',
         'PASSWORD': 'root',
-        'HOST': '0.0.0.0',  # for docker use db
-        'PORT': '33066',  # for docker use 3306
+        'HOST': 'db',
+        'PORT': '3306',
         'OPTIONS': {'charset': 'utf8mb4'},
     }
 }

@@ -42,10 +42,10 @@ http://localhost:8000/repositories
  http://localhost:8000/repositories?per_page=5&page=5
 ```
 **Ordering**\
-Sorting: it is possible to sort by any returned record using the parameter `order_by = {field}` and for descending ordering `order_by = - {field}`
+Sorting: it is possible to sort by any returned record using the parameter `order_by={field}` and for descending ordering `order_by=-{field}`
 ex:
 ```url
- http://localhost:8000/repositories?per_page=5&page=5
+ http://localhost:8000/repositories?order_by=-id
 ```
 **filters**\
 All **integer** and **datetime** fields in addition to the equality filter also implement other operations such as [`__gt`,`__gte`, `__lt`,`__lte`].

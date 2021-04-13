@@ -3,7 +3,7 @@
 
 ## Install
 Using docker and docker composer.\
-I used docker engine 20.10 and compose 1.27
+I using docker engine 20.10 and composer 1.27
 ```
 docker-compose up -d
 docker-compose exec backend python manage.py migrate
@@ -14,22 +14,22 @@ pip install -r requirements.txt
 python manage.py migrate
 ```
 
-For run tests:
+For running tests:
 ```
  docker-compose exec backend python manage.py test
 ```
 
 ## Technical details
 
-### screper
-For run the scraper:
+### scraper
+For running the scraper:
 ```
 docker-compose exec backend python githubscanner.py
 ```
 Each time you run this script it gets 30 users and their repositories from the Github api, the next time you run the script it will continue from the last user it has saved to the database. I limited it to 30 users because Github limits the number of requests without authorization to 60 requests per hour, but if it exceeds the number of requests from Github, the program is prepared to wait for the blocking time to end and continue making queries.
 
 ### api
-I created two endpoints GET:
+I created two GET endpoints:
 ```
 http://localhost:8000/users
 http://localhost:8000/repositories
@@ -41,7 +41,7 @@ http://localhost:8000/repositories
  http://localhost:8000/repositories?per_page=5&page=5
 ```
 **Ordering**\
-Sorting it is possible to sort by any returned record using the parameter `order_by = {field}` and for descending ordering `order_by = - {field}`
+Sorting: it is possible to sort by any returned record using the parameter `order_by = {field}` and for descending ordering `order_by = - {field}`
 ex:
 ```url
  http://localhost:8000/repositories?per_page=5&page=5

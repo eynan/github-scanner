@@ -59,6 +59,7 @@ Users
 |----------|:-------------:|
 | id |  integer |
 | user |    String   |
+
 Repositories
 
 | Field    |    type    |

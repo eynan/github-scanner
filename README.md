@@ -8,7 +8,7 @@ I using docker engine 20.10 and composer 1.27
 docker-compose up -d
 docker-compose exec backend python manage.py migrate
 ````
-If you prefer you can install locally used python version 3.9 and the postgreSQL 12 database.
+If you prefer you can install locally used python version 3.9.
 ```
 pip install -r requirements.txt
 python manage.py migrate
@@ -28,7 +28,8 @@ docker-compose exec backend python githubscanner.py
 ```
 Each time you run this script it gets 30 users and their repositories from the Github api, the next time you run the script it will continue from the last user it has saved to the database. I limited it to 30 users because Github limits the number of requests without authorization to 60 requests per hour, but if it exceeds the number of requests from Github, the program is prepared to wait for the blocking time to end and continue making queries.
 
-### api
+### API
+
 I created two GET endpoints:
 ```
 http://localhost:8000/users

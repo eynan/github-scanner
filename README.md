@@ -47,7 +47,7 @@ ex:
  http://localhost:8000/repositories?per_page=5&page=5
 ```
 **filtros**\
-All **integer** and **datetime** fields in addition to the equality filter also implement other operations such as [`__gt`,`__gte`, `__lt`,`__lte`,].
+All **integer** and **datetime** fields in addition to the equality filter also implement other operations such as [`__gt`,`__gte`, `__lt`,`__lte`].
 ex:
 ```
 http://localhost:8000/repositories?user__gte=6&watchers_count__gt=5

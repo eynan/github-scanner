@@ -22,7 +22,7 @@ For run tests:
 ## Technical details
 
 ### screper
-For run the screper:
+For run the scraper:
 ```
 docker-compose exec backend python githubscanner.py
 ```

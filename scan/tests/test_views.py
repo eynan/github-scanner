@@ -56,7 +56,7 @@ class RepositoryApiViewTests(APITestCase):
         self.assertEqual(response.status_code, HTTPStatus.OK)
         self.assertEqual(len(results), 1)
         self.assertEqual(user_returned['id'], self.repository_one.id)
-        self.assertEqual(user_returned['user'], self.user.id)
+        self.assertEqual(user_returned['user_id'], self.user.id)
         self.assertEqual(user_returned['name'], self.repository_one.name)
         self.assertEqual(user_returned['full_name'], self.repository_one.full_name)
         self.assertEqual(user_returned['created_at'], self.repository_one.created_at.strftime('%Y-%m-%dT%H:%M:%SZ'))

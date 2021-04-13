@@ -23,4 +23,4 @@ class RepositorySerializerTests(TestCase):
 
         data = serializer.data
 
-        self.assertEqual({f.name for f in Repository._meta.fields}, set(data.keys()))
+        self.assertEqual({f.attname for f in Repository._meta.fields}, set(data.keys()))

@@ -10,6 +10,8 @@ class UserSerializer(serializers.ModelSerializer):
 
 
 class RespositorySerializer(serializers.ModelSerializer):
+    user_id = serializers.IntegerField()
+
     class Meta:
         model = Repository
-        fields = '__all__'
+        exclude = ['user']

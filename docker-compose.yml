@@ -12,6 +12,13 @@ services:
     depends_on:
       db:
         condition: service_healthy
+    environment:
+      - SQL_ENGINE=django.db.backends.postgresql
+      - SQL_DATABASE=admin
+      - SQL_USER=root
+      - SQL_PASSWORD=root
+      - SQL_HOST=db
+      - SQL_PORT=5432
 
   db:
     image: postgres:12.0-alpine

@@ -5,3 +5,4 @@
 htmlcov/*
 .idea/*
 error.log
+db.sqlite3

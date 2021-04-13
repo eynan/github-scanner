@@ -13,6 +13,7 @@ class UserApiView(ListAPIView):
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filterset_class = UserFilterSet
     ordering_fields = '__all__'
+    ordering = ['id']
 
 
 class RepositoryApiView(ListAPIView):
@@ -20,4 +21,10 @@ class RepositoryApiView(ListAPIView):
     serializer_class = RespositorySerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter]
     filter_class = RepositoryFilterSet
-    ordering_fields = '__all__'
+    ordering_fields = [
+        'id', 'user_id', 'description', 'name',
+        'full_name', 'created_at', 'updated_at',
+        'pushed_at', 'language', 'forks_count',
+        'stargazers_count', 'watchers_count'
+    ]
+    ordering = ['id']

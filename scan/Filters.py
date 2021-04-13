@@ -20,7 +20,7 @@ class RepositoryFilterSet(django_filters.FilterSet):
         model = Repository
         fields = {
             'id': NUMBER_AND_DATE_FILTERS,
-            'user_id': NUMBER_AND_DATE_FILTERS,
+            'user': NUMBER_AND_DATE_FILTERS,
             'name': STRING_FILTERS,
             'created_at': NUMBER_AND_DATE_FILTERS,
             'updated_at': NUMBER_AND_DATE_FILTERS,

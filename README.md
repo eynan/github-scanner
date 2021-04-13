@@ -65,7 +65,7 @@ Repositories
 | Field    |    type    |
 |----------|:-------------:|
 | id |  integer |
-| user|    integer   |
+| user_id|    integer   |
 | name|    String   |
 | language|    String   |
 | forks_count|    Integer   |
